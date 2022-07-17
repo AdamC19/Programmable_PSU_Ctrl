@@ -1,0 +1,35 @@
+{
+    "spi_path":"/dev/spidev1.0",
+    "i2c_path":"/dev/i2c-2",
+    "mux_a_gpio":22,
+    "mux_b_gpio":23,
+    "mux_c_gpio":26,
+    "channel_1":{
+        "voltage_encoder":{
+            "base_path":"/sys/kernel/enc/enc0"
+        },
+        "current_encoder":{
+            "base_path":"/sys/kernel/enc/enc1"
+        },
+        "v_disp_oe_path":"/sys/class/gpio/gpio60",
+        "i_disp_oe_path":"/sys/class/gpio/gpio61",
+        "enable_gpio_path":"/sys/class/gpio/gpio27",
+        "adc_mux":0,
+        "vdac_mux":2,
+        "idac_mux":3
+    },
+    "channel_2":{
+        "voltage_encoder":{
+            "base_path":"/sys/kernel/enc/enc2"
+        },
+        "current_encoder":{
+            "base_path":"/sys/kernel/enc/enc3"
+        },
+        "v_disp_oe_path":"/sys/class/gpio/gpio62",
+        "i_disp_oe_path":"/sys/class/gpio/gpio63",
+        "enable_gpio_path":"/sys/class/gpio/gpio32",
+        "adc_mux": 1,
+        "vdac_mux": 4,
+        "idac_mux": 5
+    }
+}

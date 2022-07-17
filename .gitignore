@@ -1,0 +1,11 @@
+
+*.o
+*.ko
+*.ko.*
+*.o.*
+*.mod.*
+*.symvers
+*.order
+.tmp_versions/
+bin/
+build/
