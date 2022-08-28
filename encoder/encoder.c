@@ -353,7 +353,7 @@ static irq_handler_t handle_quadrature(encoder_data_t* enc){
 }
 
 static irq_handler_t handle_button(encoder_data_t* enc){
-    enc->switch_state |= gpio_get_value(enc->gpio_sw);
+    enc->switch_state = gpio_get_value(enc->gpio_sw);
     return (irq_handler_t) IRQ_HANDLED;  // Announce that the IRQ has been handled correctly
 }
 

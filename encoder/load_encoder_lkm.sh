@@ -8,5 +8,5 @@ if [ $? -eq 0 ]; then
     sudo rmmod encoder
 fi
 
-echo "sudo insmod encoder.ko encoder0_gpio=0x01030402 encoder1_gpio=0x01070805 encoder2_gpio=0x010A0B09 encoder3_gpio=0x010F140E"
-sudo insmod encoder.ko encoder0_gpio=0x01030402 encoder1_gpio=0x01070805 encoder2_gpio=0x010A0B09 encoder3_gpio=0x010F140E
+echo "sudo insmod encoder.ko encoder0_gpio=0x00030402 encoder1_gpio=0x00070805 encoder2_gpio=0x000A0B09 encoder3_gpio=0x000F140E"
+sudo insmod encoder.ko encoder0_gpio=0x00030402 encoder1_gpio=0x00070805 encoder2_gpio=0x000A0B09 encoder3_gpio=0x000F140E

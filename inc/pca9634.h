@@ -50,5 +50,6 @@ void pca_write_all_regs(pca9634_chip_t* chip);
 void pca_wakeup(pca9634_chip_t* chip);
 void pca_soft_reset(int i2c_fd);
 void pca_update_brightness(pca9634_chip_t* chip);
+void set_segment_value(pca9634_chip_t* chip, uint8_t* value, bool dp);
 
 #endif

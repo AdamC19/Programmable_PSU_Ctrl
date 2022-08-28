@@ -84,6 +84,9 @@ void pca_wakeup(pca9634_chip_t* chip){
     pca_write_reg(chip, PCA_REG_MODE1, reg);
 }
 
+/**
+ * 
+ */
 void pca_set_output_config(pca9634_chip_t* chip, uint8_t config){
     uint8_t reg = pca_read_reg(chip, PCA_REG_MODE2);
     if(config){
@@ -96,7 +99,11 @@ void pca_set_output_config(pca9634_chip_t* chip, uint8_t config){
 
 
 void pca_soft_reset(int i2c_fd){
-
+    if(ioctl(i2c_fd, I2C_SLAVE, 0x03) < 0){
+        return;
+    }
+    uint8_t data[] = {0xA5, 0x5A};
+    write(i2c_fd, data, 2);
 }
 
 
@@ -105,5 +112,22 @@ void pca_update_brightness(pca9634_chip_t* chip){
         return;
     }
     uint8_t cmd = PCA_AUTO_INC_BRIGHTNESS | PCA_REG_PWM0; // auto-increment for brightness only
-    i2c_smbus_write_block_data(chip->i2c_fd, cmd, PCA_REG_COUNT, chip->regs + PCA_REG_PWM0);
+    i2c_smbus_write_block_data(chip->i2c_fd, cmd, 8, chip->regs + PCA_REG_PWM0);
+}
+
+
+void set_segment_value(pca9634_chip_t* chip, uint8_t* value, bool dp){
+    uint16_t ledout_regs = 0;
+    for(int i = 0; i < 7; i++){
+        if(value[i]){
+            ledout_regs |= (0x03 << (2*i)); // this segment shall have its brightness controlled by the PWM registers
+        }
+    }
+    if(dp){
+        ledout_regs |= (0x03 << 14); // decimal point shall have its brightness controlled by the PWM regs
+    }
+    uint8_t ledout0_reg = ledout_regs & 0xFF;
+    uint8_t ledout1_reg = (ledout_regs >> 8) & 0xFF;
+    pca_write_reg(chip, PCA_REG_LEDOUT0, ledout0_reg);
+    pca_write_reg(chip, PCA_REG_LEDOUT1, ledout1_reg);
 }

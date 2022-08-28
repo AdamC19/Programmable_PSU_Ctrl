@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <string>
+#include "util.h"
 
 #define ADS1120_SPI_MODE        SPI_MODE_1
 #define ADS1120_SPI_SPEED       4000000
@@ -100,11 +101,12 @@ private:
     std::string m_cs_pin_base;
     int m_spi_fd;
     float m_vref;
+    set_mux_func m_set_mux;
+    int m_cs_mux_value;
     void begin_spi_transaction();
-    void assert_cs();
-    void deassert_cs();
+    void spi_xfer(uint8_t* data, int len);
 public:
-    ADS1120(int spi_fd, std::string cs_pin_path, float vref);
+    ADS1120(int spi_fd, int cs_mux_value, set_mux_func set_mux, float vref);
     ~ADS1120();
     void begin(uint8_t* config);
     void reset();
@@ -112,4 +114,5 @@ public:
     int16_t get_conv();
     float get_voltage();
     void set_input_mux(uint8_t config);
+    void self_cal();
 };

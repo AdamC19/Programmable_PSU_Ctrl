@@ -29,8 +29,8 @@ static int     encoder_dev_release(struct inode *, struct file *);
 static ssize_t encoder_dev_read(struct file *, char *, size_t, loff_t *);
 static ssize_t encoder_dev_write(struct file *, const char *, size_t, loff_t *);
 
-static irq_handler_t encoder_a_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
-static irq_handler_t encoder_sw_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
+// static irq_handler_t encoder_a_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
+// static irq_handler_t encoder_sw_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
 
 static irq_handler_t enc_0_a_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
 static irq_handler_t enc_0_sw_irq_handler(unsigned int irq, void* dev_id, struct pt_regs* regs);
